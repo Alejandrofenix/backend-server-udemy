@@ -71,7 +71,7 @@ app.post('/google', async(req, res) => {
                     ok: true,
                     usuario: usuarioBD,
                     token: token,
-                    id: usuarioBD._id
+                    id: usuarioBD.id
                 });
             });
 

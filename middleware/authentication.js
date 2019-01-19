@@ -28,3 +28,57 @@ exports.verificaToken = function(req, res, next) {
 
     });
 }
+
+
+// ==========================================
+// Verificar Administrador
+// =========================================
+
+exports.verificaADMIN_ROLE = function(req, res, next) {
+
+    var usuario = req.usuario;
+
+    if (usuario.role === 'ADMIN_ROLE') {
+        next();
+        return;
+    } else {
+
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Permiso Denegado',
+            errors: { message: 'Operacion denegada' }
+        });
+
+
+    }
+
+}
+
+
+
+// ==========================================
+// Verificar Admin o mismo usuario
+// =========================================
+
+exports.verificaADMIN_ROLE_o_MismoUsuario = function(req, res, next) {
+
+    var usuario = req.usuario;
+
+    var id = req.params.id;
+
+
+    if (usuario.role === 'ADMIN_ROLE' || usuario._id === id) {
+        next();
+        return;
+    } else {
+
+        return res.status(401).json({
+            ok: false,
+            mensaje: 'Permiso Denegado',
+            errors: { message: 'Operacion denegada' }
+        });
+
+
+    }
+
+}
